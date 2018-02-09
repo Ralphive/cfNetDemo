@@ -12,7 +12,13 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "B1_USER_ENV": "manager",
+        "B1_SLPATH_ENV": "/b1s/v1/",
+        "B1_PASS_ENV": "1234",
+        "B1_SLPORT_ENV": "50001",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "B1_COMP_ENV": "SBODEMOUS",
+        "B1_SERVER_ENV": "http://52.203.187.170"
       }
     },
     "cfNetDemo": {

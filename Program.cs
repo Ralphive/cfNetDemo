@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using cfNetDemo.lib;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,8 @@ namespace cfNetDemo
     {
         public static void Main(string[] args)
         {
+            serviceLayer sl = new serviceLayer();
+
             //For Cloud Foundry Port Environment
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
@@ -27,6 +30,8 @@ namespace cfNetDemo
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .Build();
+
+            
 
             host.Run();
         }
