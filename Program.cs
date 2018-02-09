@@ -14,12 +14,21 @@ namespace cfNetDemo
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+            //For Cloud Foundry Port Environment
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
                 .Build();
+
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseConfiguration(config)
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .UseApplicationInsights()
+                .Build();
+
+            host.Run();
+        }
     }
 }
