@@ -32,7 +32,21 @@
                     <th>Qty Ordered</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                @for (int i = 0; i < @Model.ITEM_LIST.value.Length; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model.ITEM_LIST.value[i].ItemCode</td>
+                        <td>@Model.ITEM_LIST.value[i].ItemName</td>
+                        <td>@Model.ITEM_LIST.value[i].QuantityOnStock</td>
+                        <td>
+                            @(@Model.ITEM_LIST.value[i].QuantityOrderedFromVendors +
+                            @Model.ITEM_LIST.value[i].QuantityOrderedByCustomers)
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
         <h4>Cloud Platform DB Items</h4>
         <table class="table .table-striped" id="resultTableSQL">

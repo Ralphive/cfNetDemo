@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using System.Net;
+using System.Linq;
+
 namespace cfNetDemo.lib
 {
     public class serviceLayer
@@ -11,16 +14,27 @@ namespace cfNetDemo.lib
         /* Service Layer module to interact with B1 Data */
         /* Server Configuration and User Credentials set as environment variables */
 
-        private static readonly HttpClient client = new HttpClient();
+        private static CookieContainer cookies;
+        private static HttpClientHandler handler;
+        private static HttpClient client;
         private static String SessionId;
-        private static String SLServer = Environment.GetEnvironmentVariable("B1_SERVER_ENV") + ":"
+        
+        private static Uri SLServer = new Uri(Environment.GetEnvironmentVariable("B1_SERVER_ENV") + ":"
                             + Environment.GetEnvironmentVariable("B1_SLPORT_ENV")
-                            + Environment.GetEnvironmentVariable("B1_SLPATH_ENV");
+                            + Environment.GetEnvironmentVariable("B1_SLPATH_ENV"));
+        private static int ItemGroupCode = 103; // just for filtering
         
 
         public serviceLayer()
         {
             /* Constructor connect to SL */
+            cookies = new CookieContainer();
+            handler = new HttpClientHandler();
+            handler.CookieContainer = cookies;
+
+            client = new HttpClient(handler);
+            client.BaseAddress = SLServer;
+
             Task<string> result = Connect();
 
             dynamic finalResult = JsonConvert.DeserializeObject(result.Result);
@@ -34,9 +48,18 @@ namespace cfNetDemo.lib
             
                      
         }
-        async Task<string> Connect()
+        public static string getSessionId()
         {
-            String uri = SLServer + "Login";
+            return SessionId;
+        }
+        public static OData getItemsList()
+        {
+            Task<string> result = getItems();
+            var odata = JsonConvert.DeserializeObject<OData>(result.Result);
+            return odata;
+        }
+        private static async Task<string> Connect()
+        {
             var data = new Dictionary<string, string>{
                     { "UserName", Environment.GetEnvironmentVariable("B1_USER_ENV")},
                     { "Password", Environment.GetEnvironmentVariable("B1_PASS_ENV")},
@@ -45,7 +68,7 @@ namespace cfNetDemo.lib
 
             var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync(uri, content);
+            HttpResponseMessage response = await client.PostAsync("Login", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine("Error Connecting to Service Layer");
@@ -54,12 +77,32 @@ namespace cfNetDemo.lib
                 return "";
             }              
             var responseString = await response.Content.ReadAsStringAsync();
+
+           var responseCookies = cookies.GetCookies(SLServer).Cast<Cookie>();
+           return responseString;
+        }
+
+        private static async Task<string> getItems()
+        {
+            String itemEndPoint = "Items?$select=ItemCode,ItemName,"
+                                    + "QuantityOnStock,QuantityOrderedFromVendors,QuantityOrderedByCustomers"
+                                    + "&$filter=ItemsGroupCode%20eq%20" + ItemGroupCode;
+
+            cookies.Add(SLServer, new Cookie("B1SESSION", SessionId));
+
+            HttpResponseMessage response = await client.GetAsync(itemEndPoint);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Error Retrieving Items");
+                Console.WriteLine("Response Message Header \n\n" + response.Content.Headers + "\n");
+                Console.WriteLine("Response Message Header \n\n" + response.Content.ReadAsStringAsync() + "\n");
+                return "";
+            }
+
+            var responseString = await response.Content.ReadAsStringAsync();
             return responseString;
         }
 
-        public static string getSessionId()
-        {
-            return SessionId;
-        }
+
     }
 }
