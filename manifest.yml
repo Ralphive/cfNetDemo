@@ -1,0 +1,6 @@
+---
+applications:
+- name: aspnetsample
+  memory: 256m
+  instances: 1
+

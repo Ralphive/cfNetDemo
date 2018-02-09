@@ -1,4 +1,6 @@
 ﻿@page
+@using cfNetDemo.Pages
+@model IndexModel
 
 <!DOCTYPE html>
 <html>
@@ -8,12 +10,15 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+    
     <div class="container">
         <div class="row text-center">
             <img src="https://i.imgur.com/TtAoZWQ.png" width="350">
             <img src="~/imgs/logo.svg" width="50">
         </div>
         <div class="row text-left" id="env">
+            <div><strong>SL SessionID:</strong>@Model.SL_SESSIONID</div>
+            <div><strong>Served by server #:</strong>@Model.ENV_SERVER</div>
         </div>
         <h4>B1 SL Items</h4>
         <table class="table .table-striped" id="resultTable">

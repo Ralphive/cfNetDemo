@@ -3,10 +3,6 @@ $(document).ready(function () {
 	$.get("/GetItems", function (json) {
 		displayItems(json);
 	});
-	//Get Environment Variables
-	$.get("/GetEnv", function (json) {
-		displayEnvironment(json);
-	});
 	//Get Items from Cloud Platform DB
 	$.get("/SelectItems", function (json) {
 		displayItemsSQL(json);
@@ -42,11 +38,6 @@ function displayItems(json) {
 	}
 }
 
-function displayEnvironment(json) {
-	$("#env").append(
-		"<div>" + "<strong>SL SessionID:</strong> " + json.sl.SessionId + "</div>" +
-		"<div>" + "<strong>Served by server #</strong> " + json.instance + "</div>");
-}
 
 function displayItemsSQL(items) {
 	$("#resultTableSQL tbody").empty();
