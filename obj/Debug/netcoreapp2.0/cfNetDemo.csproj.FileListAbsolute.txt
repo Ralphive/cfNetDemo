@@ -3,9 +3,9 @@ O:\Development\cfNetDemo\cfNetDemo\bin\Debug\netcoreapp2.0\cfNetDemo.runtimeconf
 O:\Development\cfNetDemo\cfNetDemo\bin\Debug\netcoreapp2.0\cfNetDemo.runtimeconfig.dev.json
 O:\Development\cfNetDemo\cfNetDemo\bin\Debug\netcoreapp2.0\cfNetDemo.dll
 O:\Development\cfNetDemo\cfNetDemo\bin\Debug\netcoreapp2.0\cfNetDemo.pdb
-O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.csprojResolveAssemblyReference.cache
 O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.csproj.CoreCompileInputs.cache
 O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.AssemblyInfoInputs.cache
 O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.AssemblyInfo.cs
 O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.dll
 O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.pdb
+O:\Development\cfNetDemo\cfNetDemo\obj\Debug\netcoreapp2.0\cfNetDemo.csprojResolveAssemblyReference.cache

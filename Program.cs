@@ -16,6 +16,7 @@ namespace cfNetDemo
         public static void Main(string[] args)
         {
             serviceLayer sl = new serviceLayer();
+            persist db = new persist();
 
             //For Cloud Foundry Port Environment
             var config = new ConfigurationBuilder()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cfNetDemo.lib
 {
-    public class OData
+    public class Models
     {
         public string odatametadata { get; set; }
         public Item[] value { get; set; }
@@ -20,6 +20,13 @@ namespace cfNetDemo.lib
         public float QuantityOnStock { get; set; }
         public float QuantityOrderedFromVendors { get; set; }
         public float QuantityOrderedByCustomers { get; set; }
+    }
+
+    public class ItemDB
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Integrated { get; set; }
     }
 
 }

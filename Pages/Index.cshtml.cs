@@ -13,7 +13,7 @@ namespace cfNetDemo.Pages
     {
         public string SL_SESSIONID { get; private set; }
         public string ENV_SERVER { get; private set; } = (Environment.GetEnvironmentVariable("INSTANCE_INDEX") + 1);
-        public OData ITEM_LIST { get; private set; }
+        public Models ITEM_LIST { get; private set; }
         public void OnGet()
         {
             SL_SESSIONID = serviceLayer.getSessionId();

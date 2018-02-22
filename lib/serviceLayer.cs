@@ -52,10 +52,10 @@ namespace cfNetDemo.lib
         {
             return SessionId;
         }
-        public static OData getItemsList()
+        public static Models getItemsList()
         {
             Task<string> result = getItems();
-            var odata = JsonConvert.DeserializeObject<OData>(result.Result);
+            var odata = JsonConvert.DeserializeObject<Models>(result.Result);
             return odata;
         }
         private static async Task<string> Connect()
