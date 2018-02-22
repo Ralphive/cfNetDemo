@@ -26,7 +26,16 @@ namespace cfNetDemo.lib
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public string Integrated { get; set; }
+        public bool Integrated { get; set; }
+
+        public ItemDB(string Code, String Name, Boolean Integrated)
+        {
+            this.Code = Code;
+            this.Name = Name;
+            this.Integrated = Integrated;
+
+        }
+       
     }
 
 }

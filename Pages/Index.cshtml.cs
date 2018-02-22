@@ -14,11 +14,13 @@ namespace cfNetDemo.Pages
         public string SL_SESSIONID { get; private set; }
         public string ENV_SERVER { get; private set; } = (Environment.GetEnvironmentVariable("INSTANCE_INDEX") + 1);
         public Models ITEM_LIST { get; private set; }
+        public List<ItemDB> ITEMDB_LIST { get; private set; }
         public void OnGet()
         {
-            SL_SESSIONID = serviceLayer.getSessionId();
-            ITEM_LIST = serviceLayer.getItemsList();
-            ITEM_LIST = ITEM_LIST;
+           SL_SESSIONID = serviceLayer.getSessionId();
+           ITEM_LIST = serviceLayer.getItemsList();
+           ITEMDB_LIST = persist.Select();
+
         }
     }
 }
