@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -58,15 +59,14 @@ namespace cfNetDemo.lib
             return rows;
         }
 
-        public void Insert()
+        public static void Insert(string body)
         {
-            Connect();
-
+           /** Implement Item Insertion **/
         }
 
-        public void Update()
+        public void Update(string item)
         {
-            Connect();
+            /** Implement Item Update **/
 
         }
 
